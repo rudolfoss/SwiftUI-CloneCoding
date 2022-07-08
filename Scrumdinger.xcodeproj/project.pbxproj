@@ -16,6 +16,7 @@
 		07BB99492875970A005AB5A4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB99482875970A005AB5A4 /* CardView.swift */; };
 		07BB994B2875A1A6005AB5A4 /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB994A2875A1A6005AB5A4 /* TrailingIconLabelStyle.swift */; };
 		07BB994D2875D256005AB5A4 /* ScrumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB994C2875D256005AB5A4 /* ScrumsView.swift */; };
+		07BB994F28788D5B005AB5A4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB994E28788D5B005AB5A4 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		07BB99482875970A005AB5A4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		07BB994A2875A1A6005AB5A4 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		07BB994C2875D256005AB5A4 /* ScrumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumsView.swift; sourceTree = "<group>"; };
+		07BB994E28788D5B005AB5A4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				07BB993B287434EA005AB5A4 /* Preview Content */,
 				07BB99482875970A005AB5A4 /* CardView.swift */,
 				07BB994C2875D256005AB5A4 /* ScrumsView.swift */,
+				07BB994E28788D5B005AB5A4 /* DetailView.swift */,
 			);
 			path = Scrumdinger;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07BB994728745970005AB5A4 /* DailyScrum.swift in Sources */,
+				07BB994F28788D5B005AB5A4 /* DetailView.swift in Sources */,
 				07BB9945287450B7005AB5A4 /* Theme.swift in Sources */,
 				07BB9938287434E9005AB5A4 /* MeetingView.swift in Sources */,
 				07BB994D2875D256005AB5A4 /* ScrumsView.swift in Sources */,
