@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     @Binding var scrum: DailyScrum
+    
     @State private var data = DailyScrum.Data()//개인 속성 추가
     @State private var isPresentingEditView = false
     
@@ -34,7 +35,7 @@ struct DetailView: View {
                     Text(scrum.theme.name)
                         .padding(4)
                     .foregroundColor(scrum.theme.accentColor)
-                    .background(.yellow)
+                    .background(scrum.theme.mainColor)
                         .cornerRadius(4)
                 }
                 .accessibilityElement(children: .combine)

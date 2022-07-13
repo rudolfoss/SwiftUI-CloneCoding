@@ -12,8 +12,7 @@ struct ThemeView: View {
     var body: some View {
         ZStack{
         RoundedRectangle(cornerRadius: 4)
-                //.fill(theme.mainColor)
-                .fill(Color(#colorLiteral(red: 1.0,green:0.93,blue:0.65,alpha:1)))
+                .fill(theme.mainColor)
             Label(theme.name, systemImage: "paintpalette")
                 .padding(4)
         
