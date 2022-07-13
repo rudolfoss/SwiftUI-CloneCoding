@@ -12,7 +12,8 @@ struct MeetingView: View {
     @Binding var scrum: DailyScrum
     @StateObject var scrumTimer = ScrumTimer()
     
-    private var player: AVPlayer{AVPlayer.sharedDingPlayer}
+    private var player: AVPlayer {AVPlayer.sharedDingPlayer}
+    
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16.0)
@@ -22,17 +23,9 @@ struct MeetingView: View {
             Circle()
             .strokeBorder(lineWidth: 24, antialiased: true)
             MeetingFooterView(speakers: scrumTimer.speakers, skipAction: scrumTimer.skipSpeaker)
-            
-            HStack{
-                Text("Speaker 1 of 3")
-                Spacer()
-                Button(action:{}){
-                    Image(systemName: "forward.fill")
-                }
-                .accessibilityLabel("Next speaker")
-            }
         }
     }
+     
         .padding()
         .foregroundColor(scrum.theme.accentColor)
         .onAppear{
@@ -45,6 +38,8 @@ struct MeetingView: View {
         }
         .onDisappear{
             scrumTimer.stopScrum()
+            let newHistory = History(attendees: scrum.attendees, lengthInMinutes: scrum.timer.secondsElapsed / 60)
+            scrum.history.insert(newHistory, at: 0)
         }
         .navigationBarTitleDisplayMode(.inline)
     }
