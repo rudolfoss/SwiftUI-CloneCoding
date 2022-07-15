@@ -24,6 +24,26 @@ class ScrumStore: ObservableObject{
         //Call appendingPathComponent(_:) to return the URL of a file named scrums.data.
         .appendingPathComponent("scrums.data")
     }
+    
+    //비동기 로드 메소드 만들기
+    static func load() async throws ->[DailyScrum]{
+//Calling withCheckedThrowingContinuation suspends the load function, then passes a continuation into a closure that you provide. A continuation is a value that represents the code after an awaited function.
+        try await withCheckedThrowingContinuation{ continuation in
+            //In the closure, call the legacy load function with a completion handler.
+            load{ result in
+                switch result{
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                    //The array of scrums becomes the result of the withCheckedThrowingContinuation call when the async task resumes.
+                case.success(let scrums):
+                    continuation.resume(returning: scrums)
+                }
+                
+            }
+        }
+    }
+
+    //Add a Method to load Data
     //Result is a single type that represents the outcome of an operation, whether it’s a success or failure.
     static func load(completion: @escaping(Result<[DailyScrum],Error>)->Void){
         //디스패치 큐를 사용하여 기본 스레드 또는 백그라운드 스레드에서 실행할 작업을 선택합니다.
@@ -47,6 +67,24 @@ class ScrumStore: ObservableObject{
             }catch{
                 DispatchQueue.main.async {
                     completion(.failure(error))
+                }
+            }
+        }
+    }
+    //비동기 저장 메소드 만들기.
+    //Create a static function named save that asynchronously returns an Int.
+    @discardableResult
+    static func save(scrums:[DailyScrum])async throws -> Int{
+        //Call withCheckedThrowingContinuation using the await keyword.
+        try await withCheckedThrowingContinuation{ continuation in
+            //In the closure, call the legacy save function with a completion handler.
+            save(scrums: scrums){ result in
+                switch result{
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let scrumsSaved):
+                    continuation.resume(returning: scrumsSaved)
+                
                 }
             }
         }
