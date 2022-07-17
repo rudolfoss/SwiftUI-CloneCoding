@@ -11,6 +11,9 @@ import SwiftUI
 struct ScrumdingerApp: App {
     //The @StateObject property wrapper creates a single instance of an observable object for each instance of the structure that declares it.
     @StateObject private var store = ScrumStore()
+    //add an optional state variable named errorWrapper.
+    //The default value of an optional is nil. When you assign a value to this state variable, SwiftUI updates the view.
+    @State private var errorWrapper: ErrorWrapper?
     var body: some Scene {
         WindowGroup {
             NavigationView{
@@ -23,7 +26,8 @@ struct ScrumdingerApp: App {
                                 try await ScrumStore.save(scrums: store.scrums)
                             }
                             catch{
-                                fatalError("Error saving scrums.")
+                                //Replace the fatal error calls with assignments to the new errorWrapper.
+                                errorWrapper = ErrorWrapper(error: error, guidance: "Try again later.")
                             }
                     }
                 }
@@ -35,8 +39,16 @@ struct ScrumdingerApp: App {
                     store.scrums = try await ScrumStore.load()
                 }
                 catch{
-                    fatalError("Error loading scrums.")
+                    //Replace the fatal error calls with assignments to the new errorWrapper.
+                    errorWrapper = ErrorWrapper(error: error, guidance: "Scrumdinger will load sample data and continue.")
                 }
+            }
+            //Add a sheet with a binding to the error wrapper item.
+            .sheet(item: $errorWrapper, onDismiss: {
+                //Load sample data when the user dismisses the modal.
+                store.scrums = DailyScrum.sampleData
+            }) { wrapper in
+                ErrorView(errorWrapper: wrapper)
             }
            /* .onAppear{
                 ScrumStore.load{ result in
