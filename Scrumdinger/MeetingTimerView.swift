@@ -10,6 +10,7 @@ import SwiftUI
 struct MeetingTimerView: View {
     //Add properties named theme and speakers.
     let speakers: [ScrumTimer.Speaker]
+    let isRecording: Bool
     let theme: Theme
     
     //Add a computed property named currentSpeaker that returns the name of the current speaker.
@@ -26,6 +27,11 @@ struct MeetingTimerView: View {
                 Text(currentSpeaker)
                     .font(.title)
                 Text("is speaking")
+                    Image(systemName: isRecording ? "mic" : "mic.slash")
+                        .font(.title)
+                        .padding(.top)
+//Modify the image with an accessibility label that reads either "with transcription" or "without transcription" based on the value of isRecording.
+                        .accessibilityLabel(isRecording ? "with transcription" : "without transcription")
                 }
                 //This modifier makes VoiceOver read the two text views as one sentence.
                 .accessibilityElement(children: .combine)
@@ -51,6 +57,6 @@ struct MeetingTimerView_Previews: PreviewProvider {
     }
     static var previews: some View {
         //update the preview provider.
-        MeetingTimerView(speakers: speakers, theme:  .yellow)
+        MeetingTimerView(speakers: speakers, isRecording: true, theme:  .yellow)
     }
 }
